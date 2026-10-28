@@ -58,4 +58,4 @@ class Draugr(Character):
 
 class Troll(Character):
      def __init__(self, level=5):
-        super().__init__("Draugr", 700, 700, 80, level)
+        super().__init__("Troll", 700, 700, 80, level)
