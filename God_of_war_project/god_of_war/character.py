@@ -15,7 +15,7 @@ class Character:
 
     @health.setter
     def health(self, value):
-        if value < 0:
+        if value < 0 or value > self.max_health:
             raise ValueError
         self._health = value
 
@@ -55,22 +55,21 @@ class Character:
         return f"Персонаж: {self.name}, уровень: {self.level}, максимальное здоровье: {self.max_health}, сила атаки: {self.attack_power}, текущее здоровье: {self.health}, жив ли {self.is_alive()}"
 
 
-# Проверка
-kratos = Character("Kratos", 500, 500, 100, 10)
-draugr = Character("Draugr", 150, 150, 30, 2)
+
+class Kratos(Character):
+    def __init__(self, level):
+        super().__init__("Kratos", 500, 500, 100, level)
+    
+
+class Atreus(Character):
+    def __init__(self, level):
+        super().__init__("Atreus", 250, 250, 50, level)
+
+
+
+
+kratos = Kratos(15)
+atreus = Atreus(7)
 
 print(kratos)
-print(draugr)
-
-kratos.attack(draugr)
-print(draugr.health)  # 50
-
-kratos.attack(draugr)
-print(draugr.health)  # 0
-
-print(draugr.is_alive())  # False
-
-
-
-
-
+print(atreus)
