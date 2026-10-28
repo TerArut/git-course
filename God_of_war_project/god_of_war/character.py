@@ -67,9 +67,3 @@ class Atreus(Character):
 
 
 
-
-kratos = Kratos(15)
-atreus = Atreus(7)
-
-print(kratos)
-print(atreus)
