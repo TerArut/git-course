@@ -4,22 +4,29 @@
 class Character:
     def __init__(self, name, health, max_health, attack_power, level):
         self.name = name 
-        self.health = health
         self.max_health = max_health
+        self.health = health
         self.attack_power = attack_power
         self.level = level
     
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        if value < 0:
+            raise ValueError
+        self._health = value
+
     def attack(self, target):
         if not self.is_alive():
             raise ValueError("Мёртвый персонаж не может атаковать")
         elif not target.is_alive():
             raise ValueError("Нельзя атаковать мёртвого персонажа")
-        elif target.health > self.attack_power and self.attack_power > 0:
-            target.health -= self.attack_power
         else:
-            target.health = 0
+            return target.take_damage(self.attack_power)
 
-        return target.health
     
     def take_damage(self, amount):
         if amount > 0:
@@ -62,10 +69,6 @@ kratos.attack(draugr)
 print(draugr.health)  # 0
 
 print(draugr.is_alive())  # False
-
-
-
-
 
 
 
