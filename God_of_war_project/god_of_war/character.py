@@ -25,6 +25,7 @@ class Character:
         elif not target.is_alive():
             raise ValueError("Нельзя атаковать мёртвого персонажа")
         else:
+            print(f"{self.name} атакует {target.name}!")
             return target.take_damage(self.attack_power)
 
     
