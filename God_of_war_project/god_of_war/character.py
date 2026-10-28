@@ -26,6 +26,7 @@ class Character:
             raise ValueError("Нельзя атаковать мёртвого персонажа")
         else:
             print(f"{self.name} наносит {self.attack_power} урона!")
+            print(f"{self.name} атакует {target.name}!")
             return target.take_damage(self.attack_power)
 
     
