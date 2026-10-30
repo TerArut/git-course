@@ -8,7 +8,10 @@ class Character:
         self.health = health
         self.attack_power = attack_power
         self.level = level
-    
+        self.weapon = None
+        self.is_frozen = False
+        self.inventory = []
+
     @property
     def health(self):
         return self._health
@@ -19,11 +22,24 @@ class Character:
             raise ValueError
         self._health = value
 
+    def equip_weapon(self, weapon):
+        if weapon not in self.inventory:
+            raise ValueError("Этого оружия нет в инвентаре")
+
+        self.weapon = weapon
+        self.inventory.remove(weapon)
+
+    def add_to_inventory(self, item):
+        self.inventory.append(item)
+
     def attack(self, target):
         if not self.is_alive():
             raise ValueError("Мёртвый персонаж не может атаковать")
         elif not target.is_alive():
             raise ValueError("Нельзя атаковать мёртвого персонажа")
+        elif self.weapon != None:
+            print(f"{self.name} атакует {target.name}!")
+            return self.weapon.use(target)
         else:
             print(f"{self.name} наносит {self.attack_power} урона!")
             print(f"{self.name} атакует {target.name}!")
@@ -66,6 +82,5 @@ class Kratos(Character):
 class Atreus(Character):
     def __init__(self, level):
         super().__init__("Atreus", 250, 250, 50, level)
-
 
 
